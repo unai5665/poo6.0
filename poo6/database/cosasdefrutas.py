@@ -46,7 +46,7 @@ buscar_color = '''SELECT id FROM color WHERE nombre_color LIKE '''
 
 
 class ColeccionDatos:
-    DBNAME = 'datos.db'
+    DBNAME = 'frutas.db'
 
     def __init__(self):
         self.con = Db.conectar(self.DBNAME)
