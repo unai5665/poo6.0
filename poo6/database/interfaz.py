@@ -13,7 +13,8 @@ class MainScreen(Screen):
             DataTable(classes="table1"),
             Vertical(
                 Button("Añadir fruta", id="boton_anadirF"),
-                Button("Eliminar fruta", id="boton_eliminarF")
+                Button("Eliminar fruta", id="boton_eliminarF"),
+                Button("Actualizar", id="boton_actualizarF")  
             )
         )
         yield Footer()
@@ -23,21 +24,26 @@ class MainScreen(Screen):
             self.app.switch_to_edit("fru")
         elif event.button.id == "boton_eliminarF":
             self.app.switch_to_delete("fru")
+        elif event.button.id == "boton_actualizarF": 
+            self.actualizar_tabla()
 
     def on_mount(self) -> None:
         self.actualizar_tabla()
 
     def actualizar_tabla(self) -> None:
         table = self.query_one(DataTable)
-        table.cursor_type = "none"
-        table.clear()
+        if table:
+            table.cursor_type = "none"
+            table.clear()
 
-        if not table.columns:
-            table.add_columns("ID", "Nombre de la fruta")
+            if not table.columns:
+                table.add_columns("ID", "Nombre de la fruta")
 
-        frutas = self.app.coleccion.leer("fru")
-        for fruta in frutas:
-            table.add_rows([(str(fruta[0]), fruta[1])])
+            frutas = self.app.coleccion.leer("fru")
+            for fruta in frutas:
+                table.add_rows([(str(fruta[0]), fruta[1])])
+
+
 
 
 class FormasScreen(Screen):
@@ -47,7 +53,8 @@ class FormasScreen(Screen):
             DataTable(classes="table2"),
             Vertical(
                 Button("Añadir forma", id="boton_anadirFo"),
-                Button("Eliminar forma", id="boton_eliminarFo")
+                Button("Eliminar forma", id="boton_eliminarFo"),
+                Button("Actualizar", id="boton_actualizarFo")  
             )
         )
         yield Footer()
@@ -57,21 +64,26 @@ class FormasScreen(Screen):
             self.app.switch_to_edit("for")
         elif event.button.id == "boton_eliminarFo":
             self.app.switch_to_delete("for")
+        elif event.button.id == "boton_actualizarFo":  
+            self.actualizar_tabla()
 
     def on_mount(self) -> None:
         self.actualizar_tabla()
 
     def actualizar_tabla(self) -> None:
         table = self.query_one(DataTable)
-        table.cursor_type = "none"
-        table.clear()
+        if table:
+            table.cursor_type = "none"
+            table.clear()
 
-        if not table.columns:
-            table.add_columns("ID", "Nombre de la forma")
+            if not table.columns:
+                table.add_columns("ID", "Nombre de la forma")
 
-        formas = self.app.coleccion.leer("for")
-        for forma in formas:
-            table.add_rows([(str(forma[0]), forma[1])])
+            formas = self.app.coleccion.leer("for")
+            for forma in formas:
+                table.add_rows([(str(forma[0]), forma[1])])
+
+
 
 
 class ColoresScreen(Screen):
@@ -81,7 +93,8 @@ class ColoresScreen(Screen):
             DataTable(classes="table3"),
             Vertical(
                 Button("Añadir color", id="boton_anadirC"),
-                Button("Eliminar color", id="boton_eliminarC")
+                Button("Eliminar color", id="boton_eliminarC"),
+                Button("Actualizar", id="boton_actualizarC")  
             )
         )
         yield Footer()
@@ -91,21 +104,26 @@ class ColoresScreen(Screen):
             self.app.switch_to_edit("col")
         elif event.button.id == "boton_eliminarC":
             self.app.switch_to_delete("col")
+        elif event.button.id == "boton_actualizarC":  
+            self.actualizar_tabla()
 
     def on_mount(self) -> None:
         self.actualizar_tabla()
 
     def actualizar_tabla(self) -> None:
         table = self.query_one(DataTable)
-        table.cursor_type = "none"
-        table.clear()
+        if table:
+            table.cursor_type = "none"
+            table.clear()
 
-        if not table.columns:
-            table.add_columns("ID", "Nombre del color")
+            if not table.columns:
+                table.add_columns("ID", "Nombre del color")
 
-        colores = self.app.coleccion.leer("col")
-        for color in colores:
-            table.add_rows([(str(color[0]), color[1])])
+            colores = self.app.coleccion.leer("col")
+            for color in colores:
+                table.add_rows([(str(color[0]), color[1])])
+
+
 
 
 class FooterApp(App):
